@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE golem SYSTEM "xml-golemHierro.dtd">
+
+<golem origen="jugador">
+    <tipo>Defensor creado por el jugador</tipo>
+
+    <comportamiento>
+
+        <patrullaje>
+            <velocidad>Lenta</velocidad>
+            <zona>Alrededor del lugar donde fue creado</zona>
+            <limite>Puede alejarse si no está encerrado con vallas</limite>
+            <ciclo>
+                <tipoCiclo>Infinito</tipoCiclo>
+            </ciclo>
+        </patrullaje>
+
+        <proteccion>
+            <objetivoPrincipal>Jugador</objetivoPrincipal>
+            <objetivoSecundario>Zona cercana</objetivoSecundario>
+        </proteccion>
+
+        <interaccion>
+            <jugador>
+                <relacionJugador>Nunca ataca al jugador, incluso si es atacado por él</relacionJugador>
+            </jugador>
+        </interaccion>
+
+        <restricciones>
+            <ataque>
+                <puedeAtacar>Criaturas hostiles</puedeAtacar>
+                <noAtaca>Creepers</noAtaca>
+            </ataque>
+
+            <movimiento>
+                <desplazamiento>Puede deambular libremente y alejarse del punto de creación</desplazamiento>
+                <obstaculos>Al caminar puede pisar y dañar cultivos sin evitarlos</obstaculos>
+            </movimiento>
+
+            <entorno>
+                <agua>Si entra al agua se hunde y queda inmóvil</agua>
+                <lava>Evita la lava</lava>
+                <fuego>No evita el fuego </fuego>
+                <caidas>No recibe daño por caídas</caidas>
+            </entorno>
+        </restricciones>
+
+        <reacciones>
+
+            <condicion prioridad="alta">
+                <si>Hay una criatura hostil cerca</si>
+                <entonces>
+                    <accion>
+                        <tipoAccion>Atacar</tipoAccion>
+                        <objetivoAccion tipo="hostil">Enemigo cercano</objetivoAccion>
+                    </accion>
+                </entonces>
+            </condicion>
+
+            <condicion prioridad="media">
+                <si>El jugador está en peligro o herido</si>
+                <entonces>
+                    <accion>
+                        <tipoAccion>Proteger</tipoAccion>
+                        <objetivoAccion tipo="jugador">Jugador</objetivoAccion>
+                    </accion>
+                </entonces>
+            </condicion>
+
+            <condicion prioridad="baja">
+                <si>No ocurre ningún evento importante</si>
+                <entonces>
+                    <accion>
+                        <tipoAccion>Patrullar</tipoAccion>
+                        <objetivoAccion tipo="zona">Zona</objetivoAccion>
+                    </accion>
+                </entonces>
+            </condicion>
+
+        </reacciones>
+
+    </comportamiento>
+</golem>

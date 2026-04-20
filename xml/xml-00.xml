@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE direccion SYSTEM "xml-00.dtd">
+<direccion>
+    <nombreCompleto>
+        <nombre>Sara</nombre>
+        <apellido>Ortega</apellido>
+    </nombreCompleto>
+
+    <correo>SaraOrtegaHdez13@gmail.com</correo>
+    <telefono>2321130770</telefono>
+
+    <cumple>
+        <dia>13</dia>
+        <mes>03</mes>
+        <anio>2002</anio>
+    </cumple>
+</direccion>

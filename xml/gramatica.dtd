@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT golem (tipo, comportamiento)>
+<!-- golem es el element, y origen el atributo, "|" es para decir "o" -->
+<!ATTLIST golem origen (aldea | jugador) #REQUIRED> 
+
+<!ELEMENT tipo (#PCDATA)>
+
+<!ELEMENT comportamiento (patrullaje, proteccion, interaccion, restricciones, reacciones)>
+
+<!-- Para patrullaje -->
+<!ELEMENT patrullaje (velocidad, zona, limite, ciclo)>
+<!ELEMENT velocidad (#PCDATA)>
+<!ELEMENT zona (#PCDATA)>
+<!ELEMENT limite (#PCDATA)>
+
+<!-- Para ciclo dentro de patrullaje -->
+<!ELEMENT ciclo (tipoCiclo, repeticiones?)> <!-- El "?" indica que puede aparecer 0 o 1 vez, es decir, solo aparecerán repeticiones en caso de que aplique -->
+<!ELEMENT tipoCiclo (#PCDATA)>
+<!ELEMENT repeticiones (#PCDATA)>
+
+<!-- Para protección -->
+<!ELEMENT proteccion (objetivoPrincipal, objetivoSecundario)>
+<!ELEMENT objetivoPrincipal (#PCDATA)>
+<!ELEMENT objetivoSecundario (#PCDATA)>
+
+<!-- Para interacciones -->
+<!ELEMENT interaccion (aldeanos?, jugador?)> <!-- Lo mismo, puede que tenga o no interacción con ambos o alguno -->
+
+<!-- Para aldeanos dentro de interacciones -->
+<!ELEMENT aldeanos (accionAldeano)>
+<!ELEMENT accionAldeano (#PCDATA)>
+
+<!-- Para jugadores dentro de interacciones -->
+<!ELEMENT jugador (relacionJugador)>
+<!ELEMENT relacionJugador (#PCDATA)>
+
+<!-- Para restricciones -->
+<!ELEMENT restricciones (ataque, movimiento, entorno)>
+
+<!-- Para ataque dentro de restricciones -->
+<!ELEMENT ataque (puedeAtacar, noAtaca)>
+<!ELEMENT puedeAtacar (#PCDATA)>
+<!ELEMENT noAtaca (#PCDATA)>
+
+<!-- Para movimiento dentro de restricciones -->
+<!ELEMENT movimiento (desplazamiento, obstaculos)>
+<!ELEMENT desplazamiento (#PCDATA)>
+<!ELEMENT obstaculos (#PCDATA)>
+
+<!-- Para entorno dentro de restricciones -->
+<!ELEMENT entorno (agua, lava, fuego, caidas)>
+<!ELEMENT agua (#PCDATA)>
+<!ELEMENT lava (#PCDATA)>
+<!ELEMENT fuego (#PCDATA)>
+<!ELEMENT caidas (#PCDATA)>
+
+<!-- Condiciones -->
+<!ELEMENT reacciones (condicion+)> <!-- El "+" significa que debe existir al menos una condición, pero pueden ser muchas -->
+
+<!ELEMENT condicion (si, entonces)>
+<!ATTLIST condicion prioridad (alta | media | baja) #REQUIRED>
+
+<!ELEMENT si (#PCDATA)>
+<!ELEMENT entonces (accion)>
+
+<!ELEMENT accion (tipoAccion, objetivoAccion)>
+<!ELEMENT tipoAccion (#PCDATA)>
+<!ELEMENT objetivoAccion (#PCDATA)>
+
+<!-- El hostil engloba a todos los demás (mobs hostiles), en caso de no querer especificar y mejor generalizarlo -->
+<!ATTLIST objetivoAccion tipo (zombie | esqueleto | bruja | creeper | saqueador | hostil | jugador | aldeano | aldea | zona) #REQUIRED>
