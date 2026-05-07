@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE golem SYSTEM "xml-golemHierro.dtd">
+<!DOCTYPE golem SYSTEM "gramatica.dtd">
 
 <golem origen="jugador">
     <tipo>Defensor creado por el jugador</tipo>
