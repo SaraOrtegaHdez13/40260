@@ -9,50 +9,106 @@
 // let b9 = document.getElementById("b9")
 // let b0 = document.getElementById("b0")
 
-let resultado = document.getElementById("resultado")
-let botones = document.getElementsByTagName("button")
+// let resultado = document.getElementById("resultado")
+// let botones = document.getElementsByTagName("button")
+// for (const key in botones) {
+//     if (Object.prototype.hasOwnProperty.call(botones, key)){
+//         const boton = botones[key];
+//         if (boton.className != "operadores")
+//             boton.addEventListener("click", pintar)
+//         else
+//             boton.addEventListener("click", pintar2)
+//         //console.log(boton)
+
+//     }
+// }
+
+// function pintar(e){
+//     console.log(e.target.innerText)
+//     resultado.value += e.target.innerText
+// }
+
+// // let operadores = document.getElementsByClassName("operadores")
+// //     for (const key in operadores) {
+// //         if (Object.prototype.hasOwnProperty.call(operadores, key)){
+// //             const boton = operadores[key];
+// //             boton.addEventListener("click", pintar2)
+// //             //console.log(boton)
+
+// //         }
+// //     }
+
+// function pintar2(e){
+//     console.log(e.target.innerText)
+//     if (e.target.innerText == "+")
+//         suma()
+// }
+
+// let prm1
+// function suma(){
+//     prm1 = resultado.value
+//     resultado.value=""
+
+// }
+
+// function igual(){
+//     prm2 = resultado.value
+//     resultado.value = parseInt(prm1) + parseInt(prm2)
+// }
+
+
+let resultado = document.getElementById("resultado");
+let botones = document.getElementsByTagName("button");
+
+// Variables para almacenar los valores y la operación
+let prm1 = 0;
+let operacion = "";
+
 for (const key in botones) {
-    if (Object.prototype.hasOwnProperty.call(botones, key)){
+    if (Object.prototype.hasOwnProperty.call(botones, key)) {
         const boton = botones[key];
         if (boton.className != "operadores")
-            boton.addEventListener("click", pintar)
+            boton.addEventListener("click", pintar);
         else
-            boton.addEventListener("click", pintar2)
-        //console.log(boton)
-
+            boton.addEventListener("click", pintar2);
     }
 }
 
-function pintar(e){
-    console.log(e.target.innerText)
-    resultado.value += e.target.innerText
+function pintar(e) {
+    resultado.value += e.target.innerText;
 }
 
-// let operadores = document.getElementsByClassName("operadores")
-//     for (const key in operadores) {
-//         if (Object.prototype.hasOwnProperty.call(operadores, key)){
-//             const boton = operadores[key];
-//             boton.addEventListener("click", pintar2)
-//             //console.log(boton)
-
-//         }
-//     }
-
-function pintar2(e){
-    console.log(e.target.innerText)
-    if (e.target.innerText == "+")
-        suma()
+function pintar2(e) {
+    let signo = e.target.innerText;
+    
+    if (signo === "=") {
+        igual();
+    } else if (signo === "Ce") {
+        limpiar();
+    } else {
+        // Guardamos el primer número y el tipo de operación
+        prm1 = resultado.value;
+        operacion = signo;
+        resultado.value = "";
+    }
 }
 
-let prm1
-function suma(){
-    prm1 = resultado.value
-    resultado.value=""
+function igual() {
+    let prm2 = resultado.value;
+    let calculo = 0;
+    let n1 = parseFloat(prm1);
+    let n2 = parseFloat(prm2);
 
+    if (operacion === "+") calculo = n1 + n2;
+    if (operacion === "-") calculo = n1 - n2;
+    if (operacion === "*") calculo = n1 * n2;
+    if (operacion === "/") calculo = n1 / n2;
+
+    resultado.value = calculo;
 }
 
-function igual(){
-    prm2 = resultado.value
-    resultado.value = parseInt(prm1) + parseInt(prm2)
+function limpiar() {
+    resultado.value = "";
+    prm1 = 0;
+    operacion = "";
 }
-
