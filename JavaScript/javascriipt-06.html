@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax</title>
+</head>
+<body>
+    <button onClick() = "cargar()">Cargar datos </button>
+    <table id = "tabla" border="1"></table>
+
+    <script>
+        function cargar() {
+            const xhttp = new XMLHttpRequest
+            xhttp.onload = () => {
+                const xmlDoc = xhttp.responseXML;
+                mifuncion(xmlDoc)
+            }
+            //xhttp.open("GET", "../xml/cd_catalog.xml")
+            xhttp.open("GET", "cd_catalog.xml")
+            xhttp.send()
+        }
+
+        //Por qué recibe la función XML
+        function mifuncion(xml) {
+            console.log(xml)
+            const x = xml.getElementsByTagName("CD");
+            let table="<tr><th>Artist</th><th>Title</th></tr>";
+            for (let i = 0; i <x.length; i++) {
+                table += "<tr><td>" +
+                x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue + //Tomará de los nodos hijos su primer valor
+                "</td><td>" +
+                x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                "</td></tr>";
+            }
+            document.getElementById("tabla").innerHTML = table;
+        }
+
+
+    </script>
+</body>
+</html>
